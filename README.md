@@ -1,5 +1,5 @@
 # wp-plugin-checker
-**A cross-platform python based utility to identity wordpress plugins used by a website.**
+**A cross-platform python based utility to identify wordpress plugins used by a website.**
 
 [![wpscan.png](https://s3.postimg.org/58liso0lf/wpscan.png)](https://postimg.org/image/58liso0lb/)
 
