@@ -1,11 +1,11 @@
 # wp-plugin-checker
 **A cross-platform python based utility to identity wordpress plugins used by a website.**
 
-[![wpscan.png](https://s3.postimg.org/81eqcp0xv/wpscan.png)](https://postimg.org/image/6md5nyzun/)
+[![wpscan.png](https://s3.postimg.org/58liso0lf/wpscan.png)](https://postimg.org/image/58liso0lb/)
 
 ### Requirements
 
-- Python (2 or 3)
+- Python 2
 - Python `pip`
 - Python module `requests`
 - Python module `colorama`
