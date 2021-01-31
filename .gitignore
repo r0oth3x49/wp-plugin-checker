@@ -1,0 +1,3 @@
+# Ignore cache and .bak files from index
+*.bak
+__pycache__
