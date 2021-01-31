@@ -1,1 +1,1 @@
-from Output import *
+from .Output import *

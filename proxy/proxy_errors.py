@@ -1,4 +1,4 @@
-import socks
+from . import socks
 import socket
 ProxyConnectionError = socks.ProxyConnectionError
 GeneralProxyError = socks.GeneralProxyError
