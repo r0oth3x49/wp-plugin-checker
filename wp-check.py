@@ -11,7 +11,7 @@ from time import strftime
 from wplyzer import WPlyzer
 from threading import Thread, Event
 try:
-    from Queue import Queue
+    from queue import Queue
 except ImportError:
     from queue import Queue
 
@@ -182,23 +182,23 @@ def main():
             resp = r.text
             sp = resp.replace('\n','')
             default_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
-            print '\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...'
+            print('\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...')
             Proxy.ConfigureProxy
             try:
                 r = req.get('http://my-ip.herokuapp.com/')
             except:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy connection error, make sure tor services are running...'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy connection error, make sure tor services are running...')
                 Proxy.SetDefaultProxy
             resp = r.text
             sp = resp.replace('\n','')
             proxy_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
             if default_ip != proxy_ip:
-                print sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.'
-                print sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip)
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.')
+                print(sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip))
+                print(sb + fy + '\n-------------------------------------------------------------------------')
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed'
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed')
+                print(sb + fy + '\n-------------------------------------------------------------------------')
 
         elif tor is True and newip is True:
             Proxy.SetDefaultProxy
@@ -206,28 +206,28 @@ def main():
             resp = r.text
             sp = resp.replace('\n','')
             default_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
-            print '\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...'
+            print('\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...')
             time.sleep(1)
-            print  sb + fg + '[+]' + sb + fy + ' TOR: requesting new identity...'
+            print(sb + fg + '[+]' + sb + fy + ' TOR: requesting new identity...')
             time.sleep(1)
             _resp = Proxy.NewIdentity
             time.sleep(1)
             if '250 OK' in _resp:
-                print sb + fg + '[+]' + sb + fy + ' TOR: request was successfull.'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: request was successfull.')
                 Proxy.ConfigureProxy
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: request was unsuccessfull.'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: request was unsuccessfull.')
             r = req.get('http://my-ip.herokuapp.com/')
             resp = r.text
             sp = resp.replace('\n','')
             proxy_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
             if default_ip != proxy_ip:
-                print sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.'
-                print sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip)
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.')
+                print(sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip))
+                print(sb + fy + '\n-------------------------------------------------------------------------')
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed'
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed')
+                print(sb + fy + '\n-------------------------------------------------------------------------')
 
             
 
@@ -240,10 +240,10 @@ def main():
             tgt = tgt
         else:
             tgt = 'http://%s' % (tgt)
-        print '\n' + sb + fg + '[+]' + sb + fy + ' URL: ' + str(tgt)
-        print sb + fg + '[+]' + sb + fy + ' Started: '+str(strftime('%a %b %d %I:%M:%S %Y'))
-        print sb + fg + '[+]' + sb + fy + " Wordlist: using default wordlist '" +str(wordlist)+ "'"
-        print sb + fy + '\n-------------------------------------------------------------------------'
+        print('\n' + sb + fg + '[+]' + sb + fy + ' URL: ' + str(tgt))
+        print(sb + fg + '[+]' + sb + fy + ' Started: '+str(strftime('%a %b %d %I:%M:%S %Y')))
+        print(sb + fg + '[+]' + sb + fy + " Wordlist: using default wordlist '" +str(wordlist)+ "'")
+        print(sb + fy + '\n-------------------------------------------------------------------------')
         try:
             f_in = open(wordlist)
         except (OSError, WindowsError, IOError, Exception):
@@ -298,12 +298,12 @@ def main():
                 Wp.Progress(curr, total)
                 if curr == total:
                     if outf:
-                        print sb + fy + '-------------------------------------------------------------------------'
-                        print sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')'
-                        print sb + fg + '[+]' + sb + fy +  ' Output is saved to : (' + sd + fw + str((tgt.split('/')[2]).replace('.','-')+'.txt') + sb + fy + ')'
+                        print(sb + fy + '-------------------------------------------------------------------------')
+                        print(sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')')
+                        print(sb + fg + '[+]' + sb + fy +  ' Output is saved to : (' + sd + fw + str((tgt.split('/')[2]).replace('.','-')+'.txt') + sb + fy + ')')
                     else:
-                        print sb + fy + '-------------------------------------------------------------------------'
-                        print sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')'
+                        print(sb + fy + '-------------------------------------------------------------------------')
+                        print(sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')')
                 else:
                     queue.put(curr)
             except KeyboardInterrupt:
@@ -330,23 +330,23 @@ def main():
             resp = r.text
             sp = resp.replace('\n','')
             default_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
-            print '\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...'
+            print('\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...')
             Proxy.ConfigureProxy
             try:
                 r = req.get('http://my-ip.herokuapp.com/')
             except:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy connection error, make sure tor services are running...'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy connection error, make sure tor services are running...')
                 Proxy.SetDefaultProxy
             resp = r.text
             sp = resp.replace('\n','')
             proxy_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
             if default_ip != proxy_ip:
-                print sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.'
-                print sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip)
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.')
+                print(sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip))
+                print(sb + fy + '\n-------------------------------------------------------------------------')
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed'
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed')
+                print(sb + fy + '\n-------------------------------------------------------------------------')
 
         elif tor is True and newip is True:
             Proxy.SetDefaultProxy
@@ -354,28 +354,28 @@ def main():
             resp = r.text
             sp = resp.replace('\n','')
             default_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
-            print '\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...'
+            print('\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...')
             time.sleep(1)
-            print  sb + fg + '[+]' + sb + fy + ' TOR: requesting new identity...'
+            print(sb + fg + '[+]' + sb + fy + ' TOR: requesting new identity...')
             time.sleep(1)
             _resp = Proxy.NewIdentity
             time.sleep(1)
             if '250 OK' in _resp:
-                print sb + fg + '[+]' + sb + fy + ' TOR: request was successfull.'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: request was successfull.')
                 Proxy.ConfigureProxy
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: request was unsuccessfull.'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: request was unsuccessfull.')
             r = req.get('http://my-ip.herokuapp.com/')
             resp = r.text
             sp = resp.replace('\n','')
             proxy_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
             if default_ip != proxy_ip:
-                print sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.'
-                print sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip)
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.')
+                print(sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip))
+                print(sb + fy + '\n-------------------------------------------------------------------------')
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed'
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed')
+                print(sb + fy + '\n-------------------------------------------------------------------------')
                 
         
         tgt = options.url
@@ -393,10 +393,10 @@ def main():
             wlname = wordlist.split('/')[-1] if '/' in wordlist else wordlist
         else:
             wlname = wordlist.split('\\')[-1] if '\\' in wordlist else wordlist
-        print '\n' + sb + fg + '[+]' + sb + fy + ' URL: ' + str(tgt)
-        print sb + fg + '[+]' + sb + fy + ' Started: '+str(strftime('%a %b %d %I:%M:%S %Y'))
-        print sb + fg + '[+]' + sb + fy + " Wordlist: using provided wordlist '" +str(wlname)+ "'"
-        print sb + fy + '\n-------------------------------------------------------------------------'
+        print('\n' + sb + fg + '[+]' + sb + fy + ' URL: ' + str(tgt))
+        print(sb + fg + '[+]' + sb + fy + ' Started: '+str(strftime('%a %b %d %I:%M:%S %Y')))
+        print(sb + fg + '[+]' + sb + fy + " Wordlist: using provided wordlist '" +str(wlname)+ "'")
+        print(sb + fy + '\n-------------------------------------------------------------------------')
         try:
             f_in = open(wordlist)
         except (OSError, WindowsError, IOError, Exception, IndexError):
@@ -454,12 +454,12 @@ def main():
                 Wp.Progress(curr, total)
                 if curr == total:
                     if outf:
-                        print sb + fy + '-------------------------------------------------------------------------'
-                        print sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')'
-                        print sb + fg + '[+]' + sb + fy +  ' Output is saved to : (' + sd + fw + str((tgt.split('/')[2]).replace('.','-')+'.txt') + sb + fy + ')'
+                        print(sb + fy + '-------------------------------------------------------------------------')
+                        print(sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')')
+                        print(sb + fg + '[+]' + sb + fy +  ' Output is saved to : (' + sd + fw + str((tgt.split('/')[2]).replace('.','-')+'.txt') + sb + fy + ')')
                     else:
-                        print sb + fy + '-------------------------------------------------------------------------'
-                        print sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')'
+                        print(sb + fy + '-------------------------------------------------------------------------')
+                        print(sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')')
                 else:
                     queue.put(curr)
             except KeyboardInterrupt:
@@ -486,23 +486,23 @@ def main():
             resp = r.text
             sp = resp.replace('\n','')
             default_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
-            print '\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...'
+            print('\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...')
             Proxy.ConfigureProxy
             try:
                 r = req.get('http://my-ip.herokuapp.com/')
             except:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy connection error, make sure tor services are running...'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy connection error, make sure tor services are running...')
                 Proxy.SetDefaultProxy
             resp = r.text
             sp = resp.replace('\n','')
             proxy_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
             if default_ip != proxy_ip:
-                print sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.'
-                print sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip)
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.')
+                print(sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip))
+                print(sb + fy + '\n-------------------------------------------------------------------------')
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed'
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed')
+                print(sb + fy + '\n-------------------------------------------------------------------------')
 
         elif tor is True and newip is True:
             Proxy.SetDefaultProxy
@@ -510,28 +510,28 @@ def main():
             resp = r.text
             sp = resp.replace('\n','')
             default_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
-            print '\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...'
+            print('\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...')
             time.sleep(1)
-            print  sb + fg + '[+]' + sb + fy + ' TOR: requesting new identity...'
+            print(sb + fg + '[+]' + sb + fy + ' TOR: requesting new identity...')
             time.sleep(1)
             _resp = Proxy.NewIdentity
             time.sleep(1)
             if '250 OK' in _resp:
-                print sb + fg + '[+]' + sb + fy + ' TOR: request was successfull.'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: request was successfull.')
                 Proxy.ConfigureProxy
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: request was unsuccessfull.'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: request was unsuccessfull.')
             r = req.get('http://my-ip.herokuapp.com/')
             resp = r.text
             sp = resp.replace('\n','')
             proxy_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
             if default_ip != proxy_ip:
-                print sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.'
-                print sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip)
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.')
+                print(sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip))
+                print(sb + fy + '\n-------------------------------------------------------------------------')
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed'
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed')
+                print(sb + fy + '\n-------------------------------------------------------------------------')
         
         tgt = options.url
         threads = args[0]
@@ -544,10 +544,10 @@ def main():
             tgt = 'http://%s' % (tgt)
 
 
-        print '\n' + sb + fg + '[+]' + sb + fy + ' URL: ' + str(tgt)
-        print sb + fg + '[+]' + sb + fy + ' Started: '+str(strftime('%a %b %d %I:%M:%S %Y'))
-        print sb + fg + '[+]' + sb + fy + " Wordlist: using default wordlist '" +str(wordlist)+ "'"
-        print sb + fy + '\n-------------------------------------------------------------------------'
+        print('\n' + sb + fg + '[+]' + sb + fy + ' URL: ' + str(tgt))
+        print(sb + fg + '[+]' + sb + fy + ' Started: '+str(strftime('%a %b %d %I:%M:%S %Y')))
+        print(sb + fg + '[+]' + sb + fy + " Wordlist: using default wordlist '" +str(wordlist)+ "'")
+        print(sb + fy + '\n-------------------------------------------------------------------------')
         try:
             f_in = open(wordlist)
         except (OSError, WindowsError, IOError, Exception):
@@ -605,12 +605,12 @@ def main():
                 Wp.Progress(curr, total)
                 if curr == total:
                     if outf:
-                        print sb + fy + '-------------------------------------------------------------------------'
-                        print sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')'
-                        print sb + fg + '[+]' + sb + fy +  ' Output is saved to : (' + sd + fw + str((tgt.split('/')[2]).replace('.','-')+'.txt') + sb + fy + ')'
+                        print(sb + fy + '-------------------------------------------------------------------------')
+                        print(sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')')
+                        print(sb + fg + '[+]' + sb + fy +  ' Output is saved to : (' + sd + fw + str((tgt.split('/')[2]).replace('.','-')+'.txt') + sb + fy + ')')
                     else:
-                        print sb + fy + '-------------------------------------------------------------------------'
-                        print sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')'
+                        print(sb + fy + '-------------------------------------------------------------------------')
+                        print(sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')')
                 else:
                     queue.put(curr)
             except KeyboardInterrupt:
@@ -637,23 +637,23 @@ def main():
             resp = r.text
             sp = resp.replace('\n','')
             default_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
-            print '\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...'
+            print('\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...')
             Proxy.ConfigureProxy
             try:
                 r = req.get('http://my-ip.herokuapp.com/')
             except:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy connection error, make sure tor services are running...'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy connection error, make sure tor services are running...')
                 Proxy.SetDefaultProxy
             resp = r.text
             sp = resp.replace('\n','')
             proxy_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
             if default_ip != proxy_ip:
-                print sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.'
-                print sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip)
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.')
+                print(sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip))
+                print(sb + fy + '\n-------------------------------------------------------------------------')
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed'
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed')
+                print(sb + fy + '\n-------------------------------------------------------------------------')
 
         elif tor is True and newip is True:
             Proxy.SetDefaultProxy
@@ -661,28 +661,28 @@ def main():
             resp = r.text
             sp = resp.replace('\n','')
             default_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
-            print '\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...'
+            print('\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...')
             time.sleep(1)
-            print  sb + fg + '[+]' + sb + fy + ' TOR: requesting new identity...'
+            print(sb + fg + '[+]' + sb + fy + ' TOR: requesting new identity...')
             time.sleep(1)
             _resp = Proxy.NewIdentity
             time.sleep(1)
             if '250 OK' in _resp:
-                print sb + fg + '[+]' + sb + fy + ' TOR: request was successfull.'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: request was successfull.')
                 Proxy.ConfigureProxy
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: request was unsuccessfull.'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: request was unsuccessfull.')
             r = req.get('http://my-ip.herokuapp.com/')
             resp = r.text
             sp = resp.replace('\n','')
             proxy_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
             if default_ip != proxy_ip:
-                print sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.'
-                print sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip)
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.')
+                print(sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip))
+                print(sb + fy + '\n-------------------------------------------------------------------------')
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed'
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed')
+                print(sb + fy + '\n-------------------------------------------------------------------------')
 
         
         
@@ -706,10 +706,10 @@ def main():
         else:
             wlname = wordlist.split('\\')[-1] if '\\' in wordlist else wordlist
             
-        print '\n' + sb + fg + '[+]' + sb + fy + ' URL: ' + str(tgt)
-        print sb + fg + '[+]' + sb + fy + ' Started: '+str(strftime('%a %b %d %I:%M:%S %Y'))
-        print sb + fg + '[+]' + sb + fy + " Wordlist: using provided wordlist '" +str(wlname)+ "'"
-        print sb + fy + '\n-------------------------------------------------------------------------'
+        print('\n' + sb + fg + '[+]' + sb + fy + ' URL: ' + str(tgt))
+        print(sb + fg + '[+]' + sb + fy + ' Started: '+str(strftime('%a %b %d %I:%M:%S %Y')))
+        print(sb + fg + '[+]' + sb + fy + " Wordlist: using provided wordlist '" +str(wlname)+ "'")
+        print(sb + fy + '\n-------------------------------------------------------------------------')
         try:
             f_in = open(wordlist)
         except (OSError, WindowsError, IOError, Exception, IndexError):
@@ -767,12 +767,12 @@ def main():
                 Wp.Progress(curr, total)
                 if curr == total:
                     if outf:
-                        print sb + fy + '-------------------------------------------------------------------------'
-                        print sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')'
-                        print sb + fg + '[+]' + sb + fy +  ' Output is saved to : (' + sd + fw + str((tgt.split('/')[2]).replace('.','-')+'.txt') + sb + fy + ')'
+                        print(sb + fy + '-------------------------------------------------------------------------')
+                        print(sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')')
+                        print(sb + fg + '[+]' + sb + fy +  ' Output is saved to : (' + sd + fw + str((tgt.split('/')[2]).replace('.','-')+'.txt') + sb + fy + ')')
                     else:
-                        print sb + fy + '-------------------------------------------------------------------------'
-                        print sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')'
+                        print(sb + fy + '-------------------------------------------------------------------------')
+                        print(sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(tgt) + sb + fy + ')')
                 else:
                     queue.put(curr)
             except KeyboardInterrupt:
@@ -798,23 +798,23 @@ def main():
             resp = r.text
             sp = resp.replace('\n','')
             default_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
-            print '\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...'
+            print('\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...')
             Proxy.ConfigureProxy
             try:
                 r = req.get('http://my-ip.herokuapp.com/')
             except:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy connection error, make sure tor services are running...'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy connection error, make sure tor services are running...')
                 Proxy.SetDefaultProxy
             resp = r.text
             sp = resp.replace('\n','')
             proxy_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
             if default_ip != proxy_ip:
-                print sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.'
-                print sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip)
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.')
+                print(sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip))
+                print(sb + fy + '\n-------------------------------------------------------------------------')
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed'
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed')
+                print(sb + fy + '\n-------------------------------------------------------------------------')
 
         elif tor is True and newip is True:
             Proxy.SetDefaultProxy
@@ -822,28 +822,28 @@ def main():
             resp = r.text
             sp = resp.replace('\n','')
             default_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
-            print '\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...'
+            print('\n' + sb + fg + '[+]' + sb + fy + ' TOR: configuring tor proxy...')
             time.sleep(1)
-            print  sb + fg + '[+]' + sb + fy + ' TOR: requesting new identity...'
+            print(sb + fg + '[+]' + sb + fy + ' TOR: requesting new identity...')
             time.sleep(1)
             _resp = Proxy.NewIdentity
             time.sleep(1)
             if '250 OK' in _resp:
-                print sb + fg + '[+]' + sb + fy + ' TOR: request was successfull.'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: request was successfull.')
                 Proxy.ConfigureProxy
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: request was unsuccessfull.'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: request was unsuccessfull.')
             r = req.get('http://my-ip.herokuapp.com/')
             resp = r.text
             sp = resp.replace('\n','')
             proxy_ip = (((sp.split(':')[-1]).replace('}','')).replace('"','')).replace(' ','')
             if default_ip != proxy_ip:
-                print sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.'
-                print sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip)
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[+]' + sb + fy + ' TOR: proxy configured successfully.')
+                print(sb + fg + '[+]' + sb + fy + ' TOR: network traffic will go through : (%s)' % (proxy_ip))
+                print(sb + fy + '\n-------------------------------------------------------------------------')
             else:
-                print sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed'
-                print sb + fy + '\n-------------------------------------------------------------------------'
+                print(sb + fg + '[-]' + sb + fr + ' TOR: proxy configuration is failed')
+                print(sb + fy + '\n-------------------------------------------------------------------------')
         
         url = options.url
         if 'http://' in url:
@@ -852,32 +852,32 @@ def main():
             url = url
         else:
             url = 'http://%s' % (url)
-        print '\n' + sb + fg + '[+]' + sb + fy + ' URL: ' + str(url)
-        print sb + fg + '[+]' + sb + fy + ' Started: '+str(strftime('%a %b %d %I:%M:%S %Y'))
-        print sb + fy + '\n-------------------------------------------------------------------------'
+        print('\n' + sb + fg + '[+]' + sb + fy + ' URL: ' + str(url))
+        print(sb + fg + '[+]' + sb + fy + ' Started: '+str(strftime('%a %b %d %I:%M:%S %Y')))
+        print(sb + fy + '\n-------------------------------------------------------------------------')
         Wp = WPlyzer(url)
         resp = Wp.Request()
         plugins = Wp._parse_plugins(resp)
         if len(plugins) < 1:
-            print sb + fy + '[-]' + sd + fr + ' try bruteforcing for plugins...'
+            print(sb + fy + '[-]' + sd + fr + ' try bruteforcing for plugins...')
         else:
-            for name,ver in plugins.iteritems():
+            for name,ver in plugins.items():
                 path = '%s/wp-content/plugins/%s/' % (url, name)
                 if outf:
-                    print '{}[+] {}{}{:<40} : {}{:<8}{} --> {}{}{}{}{}'.format(fy, sb, fg ,name, fy, ver, fg, sd,fm, path, sb, fg)
+                    print('{}[+] {}{}{:<40} : {}{:<8}{} --> {}{}{}{}{}'.format(fy, sb, fg ,name, fy, ver, fg, sd,fm, path, sb, fg))
                     fname = (url.split('/')[2]).replace('.','-') + '.txt'
                     fd = open(fname, "a")
                     fd.write('{:<40} : {:<8} --> {}\n'.format(name, ver, path))
                     fd.close()
                 else:
-                    print '{}[+] {}{}{:<40} : {}{:<8}{} --> {}{}{}{}{}'.format(fy, sb, fg ,name, fy, ver, fg, sd,fm, path, sb, fg)
+                    print('{}[+] {}{}{:<40} : {}{:<8}{} --> {}{}{}{}{}'.format(fy, sb, fg ,name, fy, ver, fg, sd,fm, path, sb, fg))
             if outf:
-                print sb + fy + '-------------------------------------------------------------------------'
-                print sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(url) + sb + fy + ')'
-                print sb + fg + '[+]' + sb + fy +  ' Output is saved to : (' + sd + fw + str((url.split('/')[2]).replace('.','-') + '.txt') + sb + fy + ')'
+                print(sb + fy + '-------------------------------------------------------------------------')
+                print(sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(url) + sb + fy + ')')
+                print(sb + fg + '[+]' + sb + fy +  ' Output is saved to : (' + sd + fw + str((url.split('/')[2]).replace('.','-') + '.txt') + sb + fy + ')')
             else:
-                print sb + fy + '-------------------------------------------------------------------------'
-                print sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(url) + sb + fy + ')'
+                print(sb + fy + '-------------------------------------------------------------------------')
+                print(sb + fg + '[+]' + sb + fy +  ' Scan completed for target : (' + sd + fw + str(url) + sb + fy + ')')
     
 
 

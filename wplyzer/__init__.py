@@ -1,1 +1,1 @@
-from wplyzer import WPlyzer
+from .wplyzer import WPlyzer

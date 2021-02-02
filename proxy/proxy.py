@@ -1,11 +1,11 @@
 #!/usr/bin/python
 import os,sys,time
-import socks
+from . import socks
 import socket
 import subprocess
-from tor_paths import check_path
+from .tor_paths import check_path
 if os.name == "nt":
-    import inet_pton
+    from . import inet_pton
 else:
     pass
 
@@ -54,17 +54,17 @@ class Proxy:
                         if 'git' in line:
                             ver = (line.strip())[29:-103]
                             t, v = (ver.replace("0", ":0")).split(":")
-                            print '[*] {:<4} :  {}'.format(t, v)
+                            print('[*] {:<4} :  {}'.format(t, v))
                         if 'Bootstrapped' in line:
                             per, msg = ((line.strip())[42:]).split(":")
-                            print '[*] {:<4} : {}'.format(per, msg)
+                            print('[*] {:<4} : {}'.format(per, msg))
                             if 'Done' in msg:
-                                print '\n----------------------------------------------------------------------------\n'
+                                print('\n----------------------------------------------------------------------------\n')
                         if 'opened from 127.0.0.1' in line:
-                            print '[*] {0:02d}   :  {1!s}'.format(req, umsg)
+                            print('[*] {0:02d}   :  {1!s}'.format(req, umsg))
                             req += 1
                 except KeyboardInterrupt:
-                    print '\n[-] -- User interrupted closing the services..'
+                    print('\n[-] -- User interrupted closing the services..')
                     time.sleep(1)
                     break
                 
@@ -104,17 +104,17 @@ class Proxy:
                         if 'git' in line:
                             ver = (line.strip())[29:-103]
                             t, v = (ver.replace("0", ":0")).split(":")
-                            print '[*] {:<4} :  {}'.format(t, v)
+                            print('[*] {:<4} :  {}'.format(t, v))
                         if 'Bootstrapped' in line:
                             per, msg = ((line.strip())[42:]).split(":")
-                            print '[*] {:<4} : {}'.format(per, msg)
+                            print('[*] {:<4} : {}'.format(per, msg))
                             if 'Done' in msg:
-                                print '\n----------------------------------------------------------------------------\n'
+                                print('\n----------------------------------------------------------------------------\n')
                         if 'opened from 127.0.0.1' in line:
-                            print '[*] {0:02d}   :  {1!s}'.format(req, umsg)
+                            print('[*] {0:02d}   :  {1!s}'.format(req, umsg))
                             req += 1
                 except KeyboardInterrupt:
-                    print '[-] -- User interrupted closing the services..'
+                    print('[-] -- User interrupted closing the services..')
                     time.sleep(3)
                     break
             
@@ -154,17 +154,17 @@ class Proxy:
                         if 'git' in line:
                             ver = (line.strip())[29:-103]
                             t, v = (ver.replace("0", ":0")).split(":")
-                            print '[*] {:<4} :  {}'.format(t, v)
+                            print('[*] {:<4} :  {}'.format(t, v))
                         if 'Bootstrapped' in line:
                             per, msg = ((line.strip())[42:]).split(":")
-                            print '[*] {:<4} : {}'.format(per, msg)
+                            print('[*] {:<4} : {}'.format(per, msg))
                             if 'Done' in msg:
-                                print '\n----------------------------------------------------------------------------\n'
+                                print('\n----------------------------------------------------------------------------\n')
                         if 'opened from 127.0.0.1' in line:
-                            print '[*] {0:02d}   :  {1!s}'.format(req, umsg)
+                            print('[*] {0:02d}   :  {1!s}'.format(req, umsg))
                             req += 1
                 except KeyboardInterrupt:
-                    print '[-] -- User interrupted closing the services..'
+                    print('[-] -- User interrupted closing the services..')
                     time.sleep(3)
                     break
 
